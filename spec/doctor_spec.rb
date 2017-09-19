@@ -49,4 +49,13 @@ describe 'Doctor' do
       expect(doc).to (eq(doc1))
     end
   end
+
+  describe("patient") do
+    it("lists patients under this doctors ID") do
+      doc.save
+      patients = Patient.new({:name => "steve", :birthday => "2017-09-18", :doctor_id => doc.id})
+      patients.save
+      expect(doc.patients()).to eq [patients]
+    end
+  end
 end
