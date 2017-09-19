@@ -17,4 +17,9 @@ describe Patient do
     end
   end
 
+  describe '.all' do
+    it 'starts with no patients' do
+    expect(Patient.all).to eq []  
+    end
+  end
 end
