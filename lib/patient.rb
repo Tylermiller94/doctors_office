@@ -18,4 +18,8 @@ class Patient
     end
     patients
   end
+
+  def ==(another_patient)
+    self.name == another_patient.name && self.doctor_id == another_patient.doctor_id && self.birthday == another_patient.birthday
+  end
 end
