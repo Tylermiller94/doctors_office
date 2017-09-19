@@ -13,6 +13,12 @@ describe 'Doctor' do
     end
   end
 
+  describe '.all' do
+    it 'starts off with no doctors' do
+      expect(Doctor.all).to eq []
+    end
+  end
+
   describe ("#==") do
     it("is the same doctor if it has the same name") do
       doc1 = Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor"})
