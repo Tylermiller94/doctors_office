@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Doctor' do
-  let(:doc) { Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor"}) }
+  let(:doc) { Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor", :id => nil}) }
 
   describe '#initialize' do
     it 'wil have a readable name' do
@@ -26,13 +26,26 @@ describe 'Doctor' do
 
   describe '#save' do
     it 'lets you save doctor to database' do
-      expect{ doc.save }.to change{ Doctor.all }.from([]).to([doc])
+      doc.save
+      expect(Doctor.all).to eq [doc]
+    end
+  end
+
+  describe(".find") do
+    it("returns a doctor by its ID") do
+      test_doctor = Doctor.new({:name => "Dr. Bob", :specialty => "dentist", :id => nil})
+      test_doctor.save
+      doc.save
+
+      p doc.id
+      p test_doctor.id
+      expect(Doctor.find(test_doctor.id)).to eq test_doctor
     end
   end
 
   describe ("#==") do
     it("is the same doctor if it has the same name") do
-      doc1 = Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor"})
+      doc1 = Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor", :id => nil})
       expect(doc).to (eq(doc1))
     end
   end

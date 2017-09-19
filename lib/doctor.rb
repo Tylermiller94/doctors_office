@@ -4,7 +4,7 @@ class Doctor
   def initialize(attributes)
     @name = attributes.fetch(:name)
     @specialty = attributes.fetch(:specialty)
-    @id = attributes.fetch(:id, 'nil')
+    @id = attributes.fetch(:id)
   end
 
   def self.all
@@ -13,7 +13,8 @@ class Doctor
     return_doctors.each do |doctor|
       name = doctor.fetch("name")
       specialty = doctor.fetch("specialty")
-      doctors.push(Doctor.new({:name => name, :specialty => specialty}))
+      id = doctor.fetch("id").to_i
+      doctors.push(Doctor.new({:name => name, :specialty => specialty, :id => id}))
     end
     doctors
   end
@@ -23,7 +24,17 @@ class Doctor
     @id = result.first.fetch("id").to_i
   end
 
+  def self.find(id)
+    found_doctor = nil
+    Doctor.all().each() do |doctor|
+      if doctor.id == id
+        found_doctor = doctor
+      end
+    end
+    found_doctor
+  end
+
   def ==(another_doctor)
-    self.name == another_doctor.name
+    self.name == another_doctor.name && self.id == another_doctor.id && self.specialty == another_doctor.specialty
   end
 end
