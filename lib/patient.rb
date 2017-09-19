@@ -11,12 +11,16 @@ class Patient
     return_patients = DB.exec("SELECT * FROM patients;")
     patients = []
     return_patients.each do |patient|
-      name = patients.fetch("name")
-      birthday = birthday.fetch("birthday")
-      doctor_id = doctor_id.fetch("doctor_id").to_i
+      name = patient.fetch("name")
+      birthday = patient.fetch("birthday")
+      doctor_id = patient.fetch("doctor_id").to_i
       patients.push(Patient.new({:name => name, :birthday => birthday, :doctor_id => doctor_id}))
     end
     patients
+  end
+
+  def save
+    DB.exec("INSERT INTO patients (name, birthday, doctor_id) VALUES ('#{@name}', '#{@birthday}', #{@doctor_id});")
   end
 
   def ==(another_patient)

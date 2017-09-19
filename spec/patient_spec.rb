@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Patient do
-  let(:patient) { Patient.new({:name => "Elrey", :doctor_id => 1, :birthday => "2017-09-18"}) }
+  let(:patient) { Patient.new({:name => "Elrey", :doctor_id => 1, :birthday => '2017-09-18'}) }
 
   describe "#initialize" do
     it "will have a readable name" do
@@ -27,6 +27,14 @@ describe Patient do
     it("is the same patient if it has the name") do
       patient1 = Patient.new({:name => "Elrey", :doctor_id => 1, :birthday => "2017-09-18"})
       expect(patient).to eq(patient1)
+    end
+  end
+
+  describe("#save") do
+    it ("adds a patient to the array of saved patients") do
+      patient.save
+      p Patient.all
+      expect(Patient.all).to eq [patient]
     end
   end
 end
