@@ -11,11 +11,22 @@ describe 'Doctor' do
     it 'wil have a readable specialty' do
       expect(doc.specialty).to eq "Foot Doctor"
     end
+
+    it 'sets its id when you save it' do
+      doc.save
+      expect(doc.id).to be_an_instance_of Fixnum
+    end
   end
 
   describe '.all' do
     it 'starts off with no doctors' do
       expect(Doctor.all).to eq []
+    end
+  end
+
+  describe '#save' do
+    it 'lets you save doctor to database' do
+      expect{ doc.save }.to change{ Doctor.all }.from([]).to([doc])
     end
   end
 
