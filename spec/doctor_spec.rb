@@ -12,4 +12,11 @@ describe 'Doctor' do
       expect(doc.specialty).to eq "Foot Doctor"
     end
   end
+
+  describe ("#==") do
+    it("is the same doctor if it has the same name") do
+      doc1 = Doctor.new({:name => "Dr. Smith", :specialty => "Foot Doctor"})
+      expect(doc).to (eq(doc1))
+    end
+  end
 end
